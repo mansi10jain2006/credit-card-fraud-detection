@@ -1,0 +1,124 @@
+{
+  "logistic_regression": {
+    "accuracy": 0.975452014238889,
+    "precision": 0.0560875512995896,
+    "recall": 0.8631578947368421,
+    "f1": 0.10533076429030186,
+    "roc_auc": 0.960304691049259,
+    "pr_auc": 0.6746158880494475,
+    "tn": 55271,
+    "fp": 1380,
+    "fn": 13,
+    "tp": 82,
+    "name": "Logistic Regression",
+    "train_time": 6.65
+  },
+  "decision_tree": {
+    "accuracy": 0.9861488034398901,
+    "precision": 0.09112426035502959,
+    "recall": 0.8105263157894737,
+    "f1": 0.16382978723404254,
+    "roc_auc": 0.8821316853235276,
+    "pr_auc": 0.5105772990069554,
+    "tn": 55883,
+    "fp": 768,
+    "fn": 18,
+    "tp": 77,
+    "name": "Decision Tree",
+    "train_time": 25.23
+  },
+  "random_forest": {
+    "accuracy": 0.9993303492757198,
+    "precision": 0.8275862068965517,
+    "recall": 0.7578947368421053,
+    "f1": 0.7912087912087912,
+    "roc_auc": 0.958260689410416,
+    "pr_auc": 0.7971809127791771,
+    "tn": 56636,
+    "fp": 15,
+    "fn": 23,
+    "tp": 72,
+    "name": "Random Forest",
+    "train_time": 40.03
+  },
+  "knn": {
+    "accuracy": 0.9991365030134283,
+    "precision": 0.73,
+    "recall": 0.7684210526315789,
+    "f1": 0.7487179487179487,
+    "roc_auc": 0.9089071684524545,
+    "pr_auc": 0.665674976081232,
+    "tn": 56624,
+    "fp": 27,
+    "fn": 22,
+    "tp": 73,
+    "name": "K-Nearest Neighbors (KNN)",
+    "train_time": 0.1
+  },
+  "feature_importance": [
+    {
+      "feature": "top_fraud_v_min",
+      "importance": 0.12133008959459646
+    },
+    {
+      "feature": "V14",
+      "importance": 0.11571267819922611
+    },
+    {
+      "feature": "V10",
+      "importance": 0.10558380792949716
+    },
+    {
+      "feature": "fraud_score_proxy",
+      "importance": 0.09978592921871743
+    },
+    {
+      "feature": "V12",
+      "importance": 0.06709344302502097
+    },
+    {
+      "feature": "top_fraud_v_mean",
+      "importance": 0.06569223381018362
+    },
+    {
+      "feature": "V4",
+      "importance": 0.05433581941649694
+    },
+    {
+      "feature": "v_magnitude",
+      "importance": 0.05193809154535971
+    },
+    {
+      "feature": "v14_v17_interaction",
+      "importance": 0.04357877595961366
+    },
+    {
+      "feature": "V17",
+      "importance": 0.039079961801303645
+    },
+    {
+      "feature": "V3",
+      "importance": 0.034607141882668176
+    },
+    {
+      "feature": "V11",
+      "importance": 0.03049013569110821
+    },
+    {
+      "feature": "V21",
+      "importance": 0.012624699125070422
+    },
+    {
+      "feature": "V2",
+      "importance": 0.012562933244555827
+    },
+    {
+      "feature": "V7",
+      "importance": 0.012246288344972456
+    }
+  ],
+  "is_demo": false,
+  "dataset": "Kaggle creditcard.csv (Genuine Evaluation)",
+  "best_model": "Random Forest",
+  "best_pr_auc": 0.7971809127791771
+}

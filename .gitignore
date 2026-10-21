@@ -1,0 +1,30 @@
+# Python virtual environments
+.venv/
+venv/
+
+# Dataset: do not upload the large raw file
+data/creditcard.csv
+
+# Include project model files and generated evaluation results
+!data/
+!models/
+
+# Python cache and test cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+.env.*
+
+# ML experiment artifacts
+mlruns/
+mlartifacts/
+mlflow.db
+*.egg-info/
+
+data/cleaned.csv
+data/features.csv
+data/predictions.csv

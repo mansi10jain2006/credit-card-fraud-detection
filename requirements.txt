@@ -1,0 +1,13 @@
+pandas
+scikit-learn
+fastapi
+uvicorn
+streamlit
+mlflow
+pytest
+plotly
+matplotlib
+seaborn
+jupyter
+optuna
+ruff
