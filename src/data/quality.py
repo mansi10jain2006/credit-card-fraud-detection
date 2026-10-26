@@ -3,9 +3,9 @@ Data quality gate: runs 5 automated checks on a DataFrame.
 Run from the project root with: python src/data/quality.py
 """
 
-import pandas as pd
 from pathlib import Path
 
+import pandas as pd
 
 # ---------- Configuration ----------
 # These define what the dataset SHOULD look like.

@@ -9,10 +9,10 @@ semantically.
 Run from the project root with: python src/features/engineering.py
 """
 
-import numpy as np
-import pandas as pd
 from pathlib import Path
 
+import numpy as np
+import pandas as pd
 
 # Top features by absolute correlation with Class, identified in EDA
 # (negative correlations: fraud tends to have lower values on these)

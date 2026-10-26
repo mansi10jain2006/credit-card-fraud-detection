@@ -1,3 +1,4 @@
+
 """
 Shared utilities for the Credit Card Fraud Detection application.
 
@@ -7,13 +8,15 @@ Provides data loaders, file paths, UI helpers, and model discovery.
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple
+from typing import Any
 
 # Ensure both app/ and project root are in sys.path
 _CURRENT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = _CURRENT_DIR.parent
+
 if str(_CURRENT_DIR) not in sys.path:
     sys.path.insert(0, str(_CURRENT_DIR))
+
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -24,16 +27,13 @@ try:
     from demo_data import (
         generate_demo_features,
         generate_demo_predictions,
-        generate_demo_results,
-        is_demo_mode,
     )
 except ImportError:
     from app.demo_data import (
         generate_demo_features,
         generate_demo_predictions,
-        generate_demo_results,
-        is_demo_mode,
     )
+
 
 # Clean, simple color palette
 COLORS = {
@@ -58,7 +58,11 @@ SAMPLE_TRANSACTIONS_PATH = DATA_DIR / "sample_transactions.csv"
 
 def is_real_dataset_available() -> bool:
     """Check if the real Kaggle creditcard.csv or processed dataset exists."""
-    return FEATURES_PATH.exists() or CLEANED_DATA_PATH.exists() or RAW_DATA_PATH.exists()
+    return (
+        FEATURES_PATH.exists()
+        or CLEANED_DATA_PATH.exists()
+        or RAW_DATA_PATH.exists()
+    )
 
 
 def is_real_results_available() -> bool:
@@ -67,52 +71,61 @@ def is_real_results_available() -> bool:
 
 
 @st.cache_data
-def _load_features_cached() -> Tuple[pd.DataFrame, bool]:
+def _load_features_cached() -> tuple[pd.DataFrame, bool]:
     """Internal cached loader returning (df, is_synthetic)."""
     if FEATURES_PATH.exists():
         return pd.read_csv(FEATURES_PATH), False
+
     if CLEANED_DATA_PATH.exists():
         return pd.read_csv(CLEANED_DATA_PATH), False
+
     if RAW_DATA_PATH.exists():
         return pd.read_csv(RAW_DATA_PATH), False
+
     # Fallback to synthetic demo data
     return generate_demo_features(), True
 
 
-def load_features() -> Tuple[pd.DataFrame, bool]:
+def load_features() -> tuple[pd.DataFrame, bool]:
     """
     Load feature dataset.
+
     Returns:
-        (df, is_synthetic): DataFrame and boolean indicating if data is synthetic demo data.
+        (df, is_synthetic): DataFrame and boolean indicating if data is
+        synthetic demo data.
     """
     return _load_features_cached()
 
 
 @st.cache_data
-def load_predictions() -> Tuple[pd.DataFrame, bool]:
+def load_predictions() -> tuple[pd.DataFrame, bool]:
     """Load test predictions, or fallback to demo predictions."""
     if PREDICTIONS_PATH.exists():
         return pd.read_csv(PREDICTIONS_PATH), False
+
     features, _ = load_features()
     return generate_demo_predictions(features), True
 
 
 @st.cache_data
-def load_model_results() -> Optional[Dict[str, Any]]:
+def load_model_results() -> dict[str, Any] | None:
     """
     Load model comparison results.
-    Returns None if real evaluation hasn't been run yet, ensuring no fabricated metrics.
+
+    Returns None if real evaluation hasn't been run yet, ensuring no
+    fabricated metrics.
     """
     if RESULTS_PATH.exists():
         try:
-            with open(RESULTS_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
+            with open(RESULTS_PATH, "r", encoding="utf-8") as file:
+                return json.load(file)
+        except (OSError, json.JSONDecodeError):
             return None
+
     return None
 
 
-def get_available_models() -> Dict[str, Path]:
+def get_available_models() -> dict[str, Path]:
     """
     Discover which of the four required models exist in models/.
     Excludes any generic or legacy production model aliases.
@@ -123,14 +136,20 @@ def get_available_models() -> Dict[str, Path]:
         "Random Forest": MODELS_DIR / "random_forest.pkl",
         "K-Nearest Neighbors (KNN)": MODELS_DIR / "knn.pkl",
     }
-    return {name: path for name, path in model_mapping.items() if path.exists()}
+
+    return {
+        name: path
+        for name, path in model_mapping.items()
+        if path.exists()
+    }
 
 
 def render_footer():
     """Simple, clean academic project footer."""
     st.markdown("---")
     st.markdown(
-        "<div style='text-align: center; color: #7f8c8d; font-size: 0.85rem; padding: 0.3rem 0;'>"
+        "<div style='text-align: center; color: #7f8c8d; "
+        "font-size: 0.85rem; padding: 0.3rem 0;'>"
         "Credit Card Fraud Detection · Machine Learning Mini-Project"
         "</div>",
         unsafe_allow_html=True,
@@ -140,6 +159,8 @@ def render_footer():
 def page_header(title: str, subtitle: str = ""):
     """Consistent, clean page header."""
     st.markdown(f"## {title}")
+
     if subtitle:
         st.caption(subtitle)
+
     st.markdown("---")

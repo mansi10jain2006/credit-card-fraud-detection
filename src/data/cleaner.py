@@ -3,12 +3,12 @@ Data cleaner: handles nulls, duplicates, dtypes; saves cleaned CSV.
 Run from the project root with: python src/data/cleaner.py
 """
 
-import pandas as pd
 from pathlib import Path
+
+import pandas as pd
 
 # Import the quality gate from the sibling module
 from src.data.quality import check_data_quality, print_report
-
 
 # ---------- Configuration ----------
 

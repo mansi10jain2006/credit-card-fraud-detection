@@ -18,15 +18,13 @@ Methodology:
 import json
 import time
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Any
 
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
@@ -37,8 +35,10 @@ from sklearn.metrics import (
     roc_auc_score,
 )
 from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.tree import DecisionTreeClassifier
 
 TARGET_COLUMN = "Class"
 RANDOM_STATE = 42
@@ -90,7 +90,7 @@ def load_dataset() -> pd.DataFrame:
     )
 
 
-def split_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
+def split_data(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """Perform a stratified 80/20 train/test split."""
     X = df.drop(columns=[TARGET_COLUMN])
     y = df[TARGET_COLUMN]
@@ -105,7 +105,7 @@ def split_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series,
     return X_train, X_test, y_train, y_test
 
 
-def build_models() -> Dict[str, Any]:
+def build_models() -> dict[str, Any]:
     """
     Construct the four candidate models.
     Pipelines ensure scaling is fitted strictly on training data without leakage.
@@ -163,7 +163,7 @@ def build_models() -> Dict[str, Any]:
 
 def balance_training_for_knn(
     X_train: pd.DataFrame, y_train: pd.Series, max_samples: int = 10000
-) -> Tuple[pd.DataFrame, pd.Series]:
+) -> tuple[pd.DataFrame, pd.Series]:
     """
     Subsample majority class strictly within training data for KNN.
     Keeps all training fraud cases and samples legitimate cases to prevent O(N^2) memory freeze.
@@ -183,7 +183,7 @@ def balance_training_for_knn(
     return X_train.loc[selected_indices], y_train.loc[selected_indices]
 
 
-def evaluate_model(model: Any, X_test: pd.DataFrame, y_test: pd.Series) -> Dict[str, Any]:
+def evaluate_model(model: Any, X_test: pd.DataFrame, y_test: pd.Series) -> dict[str, Any]:
     """Evaluate predictions and probabilities on held-out test data."""
     y_pred = model.predict(X_test)
 

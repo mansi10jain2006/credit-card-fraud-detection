@@ -30,7 +30,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-
 # Identify this as a classification task (vs. regression)
 TASK_TYPE = "classification"
 TARGET_COLUMN = "Class"

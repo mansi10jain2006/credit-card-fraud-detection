@@ -2,8 +2,9 @@
 Data loader: inspects a CSV file and prints key information about it.
 """
 
-import pandas as pd
 from pathlib import Path
+
+import pandas as pd
 
 
 def load_data(csv_path: str) -> pd.DataFrame:

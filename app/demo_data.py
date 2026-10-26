@@ -5,8 +5,9 @@ Used ONLY when real pipeline artifacts have not yet been produced.
 All generated data is explicitly identified as synthetic placeholders.
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 
